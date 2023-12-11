@@ -1,8 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AuthService } from './auth.service';
-import { UserService } from '@app/user/services';
-import { plainToInstance } from 'class-transformer';
-import { RegisterOutputDto } from '../dtos';
+import { UserService } from '@app/apps/user/services';
 
 describe('AuthService', () => {
   let authService: AuthService;
