@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AuthService } from './auth.service';
 import { UserService } from '@app/apps/user/services';
+import { RequestContextDto } from '@app/shared/request-context';
 
 describe('AuthService', () => {
   let authService: AuthService;
@@ -42,7 +43,10 @@ describe('AuthService', () => {
     };
 
     it('should create a new user', async () => {
-      const res = await authService.register(registerInputDto);
+      const res = await authService.register(
+        {} as RequestContextDto,
+        registerInputDto,
+      );
       expect(userService.createUser).toHaveBeenCalledWith(registerInputDto);
       expect(res).toEqual(_mockUser);
     });

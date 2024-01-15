@@ -2,9 +2,13 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { configModuleOptions } from './configs/module-options';
+import { AppLoggerModule } from './logger/logger.module';
+import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
+import { LoggingInterceptor } from './interceptors';
 
 @Module({
   imports: [
+    AppLoggerModule,
     ConfigModule.forRoot(configModuleOptions),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -23,7 +27,7 @@ import { configModuleOptions } from './configs/module-options';
       }),
     }),
   ],
-  exports: [ConfigModule],
-  providers: [],
+  exports: [ConfigModule, AppLoggerModule],
+  providers: [{ provide: APP_INTERCEPTOR, useClass: LoggingInterceptor }],
 })
 export class SharedModule {}

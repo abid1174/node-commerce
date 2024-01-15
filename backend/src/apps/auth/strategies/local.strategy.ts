@@ -4,17 +4,22 @@ import { Strategy } from 'passport-local';
 import { STRATEGY_LOCAL } from '../constants';
 import { AuthService } from '../services';
 import { UserAccessTokenClaimsDto } from '../dtos';
+import { createRequestContext } from '@app/shared/request-context';
+import { AppLogger } from '@app/shared/logger';
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy, STRATEGY_LOCAL) {
-  constructor(private authService: AuthService) {
+  constructor(
+    private logger: AppLogger,
+    private authService: AuthService,
+  ) {
     // Add option passReqToCallback: true to configure strategy to be request-scoped.
     super({
       usernameField: 'username',
       passwordField: 'password',
       passReqToCallback: true,
     });
-    // this.logger.setContext(LocalStrategy.name);
+    this.logger.setContext(LocalStrategy.name);
   }
 
   async validate(
@@ -22,7 +27,8 @@ export class LocalStrategy extends PassportStrategy(Strategy, STRATEGY_LOCAL) {
     username: string,
     password: string,
   ): Promise<UserAccessTokenClaimsDto> {
-    const ctx = createRequestContext(request);
+    //TODO: Fix any here
+    const ctx = createRequestContext(request as any);
 
     this.logger.log(ctx, `${this.validate.name} was called`);
 
