@@ -12,17 +12,28 @@ export class RegisterInputDto {
   @IsNotEmpty()
   @MaxLength(100)
   @IsString()
-  name: string;
+  readonly first_name: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @MaxLength(100)
+  @IsString()
+  readonly last_name: string;
+
+  @ApiProperty()
+  @MaxLength(100)
+  @IsString()
+  readonly username: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsEmail()
   @MaxLength(100)
-  email: string;
+  readonly email: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @Length(6, 100)
   @IsString()
-  password: string;
+  readonly password: string;
 }

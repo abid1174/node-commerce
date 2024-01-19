@@ -5,37 +5,37 @@ import { Expose } from 'class-transformer';
 export class UserOutputDto {
   @Expose()
   @ApiProperty()
-  id: number;
+  readonly id: number;
 
   @Expose()
   @ApiProperty()
-  username: string;
+  readonly username: string;
 
   @Expose()
   @ApiProperty()
-  first_name: string;
+  readonly first_name: string;
 
   @Expose()
   @ApiProperty()
-  last_name: string;
+  readonly last_name: string;
 
   @Expose()
   @ApiProperty({ example: [ROLES.USER] })
-  roles: ROLES[];
+  readonly roles: ROLES[];
 
   @Expose()
   @ApiProperty()
-  email: string;
+  readonly email: string;
 
   @Expose()
   @ApiProperty()
-  isAccountDisabled: boolean;
+  readonly isAccountDisabled: boolean;
 
   @Expose()
   @ApiProperty()
-  createdAt: string;
+  readonly createdAt: string;
 
   @Expose()
   @ApiProperty()
-  updatedAt: string;
+  readonly updatedAt: string;
 }

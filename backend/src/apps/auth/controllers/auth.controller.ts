@@ -1,9 +1,10 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { AuthService } from '../services/auth.service';
-import { RegisterInputDto } from '../dtos';
+import { LoginInputDto, RegisterInputDto } from '../dtos';
 import { ReqContext, RequestContextDto } from '@app/shared/request-context';
 import { AppLogger } from '@app/shared/logger';
 import { ApiTags } from '@nestjs/swagger';
+import { LocalAuthGuard } from '../guards';
 
 @Controller('auth')
 @ApiTags('Auth')
@@ -16,7 +17,11 @@ export class AuthController {
   }
 
   @Post('login')
-  async login(@ReqContext() ctx: RequestContextDto) {
+  @UseGuards(LocalAuthGuard)
+  async login(
+    @ReqContext() ctx: RequestContextDto,
+    // @Body() credential: LoginInputDto,
+  ) {
     this.logger.log(ctx, `${this.login.name} was called`);
 
     const authToken = this.authService.login(ctx);

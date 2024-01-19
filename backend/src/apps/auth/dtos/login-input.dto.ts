@@ -5,11 +5,11 @@ export class LoginInputDto {
   @IsNotEmpty()
   @ApiProperty()
   @IsString()
-  @MaxLength(200)
-  email: string;
+  @MaxLength(100)
+  readonly username: string;
 
   @IsNotEmpty()
   @ApiProperty()
   @IsString()
-  password: string;
+  readonly password: string;
 }

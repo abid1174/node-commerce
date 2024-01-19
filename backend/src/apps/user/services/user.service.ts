@@ -32,7 +32,7 @@ export class UserService {
   async validateUsernamePassword(
     ctx: RequestContextDto,
     username: string,
-    pass: string,
+    password: string,
   ): Promise<UserOutputDto> {
     this.logger.log(ctx, `${this.validateUsernamePassword.name} was called`);
 
@@ -40,7 +40,7 @@ export class UserService {
     const user = await this.repository.findOne({ where: { username } });
     if (!user) throw new UnauthorizedException();
 
-    const match = await compare(pass, user.password);
+    const match = await compare(password, user.password);
     if (!match) throw new UnauthorizedException();
 
     return plainToClass(UserOutputDto, user, {

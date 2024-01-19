@@ -27,6 +27,7 @@ export class AuthService {
   login(ctx: RequestContextDto): TokenOutputDto {
     this.logger.log(ctx, `${this.login.name} was called`);
 
+    console.log('======== user', ctx.user);
     return this.getAuthToken(ctx, ctx.user);
   }
 

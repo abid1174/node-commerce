@@ -4,21 +4,33 @@ import { ApiProperty } from '@nestjs/swagger';
 export class RegisterOutputDto {
   @Expose()
   @ApiProperty()
-  id: number;
+  readonly id: number;
 
   @Expose()
   @ApiProperty()
-  name: string;
+  readonly first_name: string;
 
   @Expose()
   @ApiProperty()
-  email: string;
+  readonly last_name: string;
 
   @Expose()
   @ApiProperty()
-  createdAt: string;
+  readonly username: string;
 
   @Expose()
   @ApiProperty()
-  updatedAt: string;
+  readonly email: string;
+
+  @Expose()
+  @ApiProperty()
+  readonly createdAt: string;
+
+  @Expose()
+  @ApiProperty()
+  readonly updatedAt: string;
+
+  @Expose()
+  @ApiProperty()
+  readonly isAccountDisabled: boolean;
 }
