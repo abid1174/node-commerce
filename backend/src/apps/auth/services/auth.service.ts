@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 import {
   RegisterInputDto,
@@ -67,5 +67,27 @@ export class AuthService {
     return plainToInstance(TokenOutputDto, authToken, {
       excludeExtraneousValues: true,
     });
+  }
+
+  async validateUser(
+    ctx: RequestContextDto,
+    username: string,
+    pass: string,
+  ): Promise<UserAccessTokenClaimsDto> {
+    this.logger.log(ctx, `${this.validateUser.name} was called`);
+
+    // The userService will throw Unauthorized in case of invalid username/password.
+    const user = await this.userService.validateUsernamePassword(
+      ctx,
+      username,
+      pass,
+    );
+
+    // Prevent disabled users from logging in.
+    if (user.isAccountDisabled) {
+      throw new UnauthorizedException('This user account has been disabled');
+    }
+
+    return user;
   }
 }
