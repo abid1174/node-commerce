@@ -5,24 +5,27 @@ import { Expose } from 'class-transformer';
 export class TokenOutputDto {
   @Expose()
   @ApiProperty()
-  accessToken: string;
+  readonly accessToken: string;
 
   @Expose()
   @ApiProperty()
-  refreshToken: string;
+  readonly refreshToken: string;
 }
 
 export class UserAccessTokenClaimsDto {
   @Expose()
-  id: number;
+  readonly id: number;
 
   @Expose()
-  username: string;
+  readonly username: string;
 
   @Expose()
-  roles: ROLES[];
+  readonly email: string;
+
+  @Expose()
+  readonly roles: ROLES[];
 }
 
 export class UserRefreshTokenClaimsDto {
-  id: number;
+  readonly id: number;
 }

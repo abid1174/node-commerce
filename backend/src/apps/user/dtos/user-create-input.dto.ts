@@ -13,17 +13,28 @@ export class CreateUserInputDto {
   @IsOptional()
   @IsNotEmpty()
   @IsString()
-  name: string;
+  readonly first_name: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsNotEmpty()
+  @IsString()
+  readonly last_name: string;
+
+  @ApiProperty()
+  @MaxLength(100)
+  @IsString()
+  readonly username: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsEmail()
   @MaxLength(100)
-  email: string;
+  readonly email: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
   @Length(6, 100)
-  password: string;
+  readonly password: string;
 }

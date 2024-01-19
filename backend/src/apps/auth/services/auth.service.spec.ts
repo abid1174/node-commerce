@@ -37,7 +37,9 @@ describe('AuthService', () => {
 
   describe('register', () => {
     const registerInputDto = {
-      name: 'abid',
+      first_name: 'abid',
+      last_name: 'al-amin',
+      username: 'abid1174',
       email: 'abid@gmail.com',
       password: '123456',
     };

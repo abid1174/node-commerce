@@ -10,7 +10,7 @@ import { AppLogger } from '@app/shared/logger';
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy, STRATEGY_LOCAL) {
   constructor(
-    private logger: AppLogger,
+    private readonly logger: AppLogger,
     private authService: AuthService,
   ) {
     // Add option passReqToCallback: true to configure strategy to be request-scoped.
