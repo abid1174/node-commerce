@@ -30,13 +30,13 @@ export class UserService {
   }
 
   async validateUsernamePassword(
-    ctx: RequestContextDto,
+    // ctx: RequestContextDto,
     username: string,
     password: string,
   ): Promise<UserOutputDto> {
-    this.logger.log(ctx, `${this.validateUsernamePassword.name} was called`);
+    // this.logger.log(ctx, `${this.validateUsernamePassword.name} was called`);
 
-    this.logger.log(ctx, `calling ${UserRepository.name}.findOne`);
+    // this.logger.log(ctx, `calling ${UserRepository.name}.findOne`);
     const user = await this.repository.findOne({ where: { username } });
     if (!user) throw new UnauthorizedException();
 

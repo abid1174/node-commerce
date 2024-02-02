@@ -71,15 +71,16 @@ export class AuthService {
   }
 
   async validateUser(
-    ctx: RequestContextDto,
+    // ctx: RequestContextDto,
     username: string,
     pass: string,
   ): Promise<UserAccessTokenClaimsDto> {
-    this.logger.log(ctx, `${this.validateUser.name} was called`);
+    // this.logger.log(ctx, `${this.validateUser.name} was called`);
+
+    console.log(username, pass);
 
     // The userService will throw Unauthorized in case of invalid username/password.
     const user = await this.userService.validateUsernamePassword(
-      ctx,
       username,
       pass,
     );

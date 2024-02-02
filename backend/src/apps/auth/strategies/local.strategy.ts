@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-local';
 import { STRATEGY_LOCAL } from '../constants';
@@ -8,7 +8,7 @@ import { createRequestContext } from '@app/shared/request-context';
 import { AppLogger } from '@app/shared/logger';
 
 @Injectable()
-export class LocalStrategy extends PassportStrategy(Strategy, STRATEGY_LOCAL) {
+export class LocalStrategy extends PassportStrategy(Strategy) {
   constructor(
     private readonly logger: AppLogger,
     private authService: AuthService,
@@ -19,6 +19,7 @@ export class LocalStrategy extends PassportStrategy(Strategy, STRATEGY_LOCAL) {
       passwordField: 'password',
       passReqToCallback: true,
     });
+
     this.logger.setContext(LocalStrategy.name);
   }
 
@@ -32,7 +33,7 @@ export class LocalStrategy extends PassportStrategy(Strategy, STRATEGY_LOCAL) {
 
     this.logger.log(ctx, `${this.validate.name} was called`);
 
-    const user = await this.authService.validateUser(ctx, username, password);
+    const user = await this.authService.validateUser(username, password);
     // Passport automatically creates a user object, based on the value we return from the validate() method,
     // and assigns it to the Request object as req.user
     return user;
